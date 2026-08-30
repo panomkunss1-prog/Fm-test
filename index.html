@@ -1,0 +1,125 @@
+<!doctype html>
+<html lang="th">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<title>Football Executive Management — Mobile Prototype</title>
+<style>
+:root{
+  --bg:#07111d;--panel:#0d1b2a;--panel2:#112437;--line:#243a50;
+  --text:#f2f5f7;--muted:#8fa2b4;--gold:#d8b15a;--green:#55c78a;
+  --red:#e56a6a;--blue:#5ca9e6;
+}
+*{box-sizing:border-box} body{margin:0;background:#03080d;color:var(--text);font-family:Inter,system-ui,-apple-system,BlinkMacSystemFont,"Segoe UI",sans-serif}
+button{font:inherit;color:inherit}
+.app{max-width:430px;margin:auto;min-height:100vh;background:var(--bg);display:flex;flex-direction:column}
+.top{padding:18px 18px 12px;border-bottom:1px solid var(--line);background:linear-gradient(180deg,#0d1b2a,#091522)}
+.brand{font-size:11px;letter-spacing:2px;color:var(--gold);font-weight:800}.title{font-size:23px;font-weight:850;margin-top:3px}.season{color:var(--muted);font-size:12px;margin-top:3px}
+.content{padding:16px 14px 90px;flex:1}
+.screen{display:none}.screen.active{display:block}
+h2{font-size:20px;margin:0 0 12px}.sub{font-size:12px;color:var(--muted)}
+.hero{padding:17px;border:1px solid var(--line);background:var(--panel);border-radius:18px;margin-bottom:12px}
+.hero-row{display:flex;justify-content:space-between;gap:12px}.club{font-size:22px;font-weight:850}.badge{padding:5px 9px;border-radius:999px;background:#173222;color:var(--green);font-size:11px;font-weight:800;height:max-content}
+.kpis{display:grid;grid-template-columns:repeat(3,1fr);gap:8px;margin-top:14px}.kpi{background:#0a1622;border:1px solid var(--line);padding:10px;border-radius:12px}.kpi b{display:block;font-size:16px}.kpi span{font-size:10px;color:var(--muted)}
+.card{background:var(--panel);border:1px solid var(--line);border-radius:16px;padding:14px;margin-bottom:10px}.card-head{display:flex;justify-content:space-between;align-items:center;margin-bottom:8px}.card-head b{font-size:13px}.link{font-size:11px;color:var(--gold)}
+.decision{display:flex;gap:12px;align-items:center}.icon{width:40px;height:40px;border-radius:12px;background:#172b3d;display:grid;place-items:center;font-size:20px}.decision b{font-size:13px}.decision p{margin:3px 0 0;color:var(--muted);font-size:11px;line-height:1.35}
+.row{display:flex;justify-content:space-between;padding:9px 0;border-bottom:1px solid #1b2c3d;font-size:12px}.row:last-child{border-bottom:0}.good{color:var(--green)}.warn{color:var(--gold)}.bad{color:var(--red)}
+.progress{height:7px;background:#172536;border-radius:99px;overflow:hidden;margin-top:7px}.progress i{display:block;height:100%;background:var(--gold)}
+.table{width:100%;border-collapse:collapse;font-size:11px}.table th{color:var(--muted);font-weight:600;text-align:left;padding:7px}.table td{padding:9px 7px;border-top:1px solid #1b2c3d}.pos{font-weight:800;color:var(--gold)}
+.choice{display:grid;gap:8px}.choice button,.primary{border:1px solid var(--line);background:#102335;border-radius:12px;padding:12px;text-align:left;cursor:pointer}.choice button:hover,.primary:hover{border-color:#42617e}.primary{background:#162f44;text-align:center;width:100%;font-weight:800;color:#fff}
+.notice{font-size:11px;color:var(--muted);background:#0a1622;border-left:3px solid var(--gold);padding:10px 11px;border-radius:8px;margin-bottom:12px}
+.bottom{position:fixed;bottom:0;left:50%;transform:translateX(-50%);width:min(430px,100%);display:grid;grid-template-columns:repeat(5,1fr);background:#08131f;border-top:1px solid var(--line);padding:7px 5px calc(7px + env(safe-area-inset-bottom));z-index:5}
+.nav{border:0;background:none;color:var(--muted);font-size:9px;padding:5px 2px;cursor:pointer}.nav span{display:block;font-size:19px;margin-bottom:2px}.nav.active{color:var(--gold)}
+.toast{position:fixed;left:50%;bottom:75px;transform:translateX(-50%);background:#162b3d;border:1px solid var(--line);padding:10px 13px;border-radius:12px;font-size:11px;display:none;max-width:380px;width:calc(100% - 30px);text-align:center}
+.small-grid{display:grid;grid-template-columns:1fr 1fr;gap:8px}.metric{padding:11px;background:#0a1622;border-radius:12px;border:1px solid var(--line)}.metric strong{font-size:17px}.metric div{font-size:10px;color:var(--muted);margin-top:2px}
+@media(min-width:700px){body{padding:20px}.app{border:1px solid var(--line);border-radius:22px;overflow:hidden;min-height:820px}.bottom{position:absolute}}
+</style>
+</head>
+<body>
+<div class="app">
+<header class="top">
+  <div class="brand">FOOTBALL EXECUTIVE MANAGEMENT</div>
+  <div class="title" id="roleTitle">Club Chairman</div>
+  <div class="season">Season 2026/27 · Executive Prototype</div>
+</header>
+
+<main class="content">
+<section id="home" class="screen active">
+  <div class="hero">
+    <div class="hero-row"><div><div class="sub">YOUR CLUB</div><div class="club">Bangkok United</div><div class="sub">Thai League · Chairman Office</div></div><div class="badge">STABLE</div></div>
+    <div class="kpis"><div class="kpi"><b>฿184M</b><span>Cash</span></div><div class="kpi"><b>68</b><span>Reputation</span></div><div class="kpi"><b>+12</b><span>Board Trust</span></div></div>
+  </div>
+  <div class="notice">คุณไม่ได้คุมแทคติกหรือผู้เล่นโดยตรง — ทุกการตัดสินใจส่งผลต่อองค์กรและการจำลองการแข่งขัน</div>
+  <div class="card">
+    <div class="card-head"><b>Executive Decisions</b><span class="link">3 pending</span></div>
+    <div class="choice">
+      <button onclick="toast('เปิดการตัดสินใจ: ต่อสัญญา Manager')"><div class="decision"><div class="icon">🧑‍💼</div><div><b>Manager Contract</b><p>สัญญาเหลือ 8 เดือน · Board แนะนำให้ต่อ</p></div></div></button>
+      <button onclick="toast('เปิดการตัดสินใจ: Youth Investment')"><div class="decision"><div class="icon">🌱</div><div><b>Youth Academy</b><p>ลงทุนเพิ่ม ฿18M เพื่อเพิ่มศักยภาพระยะยาว</p></div></div></button>
+      <button onclick="toast('เปิดการตัดสินใจ: Sponsor Proposal')"><div class="decision"><div class="icon">🤝</div><div><b>Sponsor Proposal</b><p>ข้อเสนอ 2 ปี · ฿32M/ฤดูกาล · เงื่อนไขพิเศษ</p></div></div></button>
+    </div>
+  </div>
+  <div class="card"><div class="card-head"><b>Club Pulse</b><span class="link">View</span></div>
+    <div class="row"><span>League position</span><b class="good">3rd</b></div>
+    <div class="row"><span>Manager performance</span><b class="good">82%</b></div>
+    <div class="row"><span>Squad morale</span><b>74</b></div>
+    <div class="row"><span>Facility quality</span><b>61</b></div>
+  </div>
+</section>
+
+<section id="club" class="screen">
+  <h2>Club</h2><div class="sub" style="margin-bottom:12px">บริหารองค์กร ไม่ใช่คุมการแข่งขัน</div>
+  <div class="small-grid"><div class="metric"><strong>฿184M</strong><div>Available cash</div></div><div class="metric"><strong>฿96M</strong><div>Wage budget</div></div><div class="metric"><strong>68</strong><div>Reputation</div></div><div class="metric"><strong>61</strong><div>Facilities</div></div></div>
+  <div class="card"><div class="card-head"><b>Manager</b><span class="good">GOOD</span></div><div class="row"><span>Performance</span><b>82%</b></div><div class="row"><span>Board relationship</span><b>78</b></div><div class="row"><span>Contract</span><b>8 months</b></div><button class="primary" onclick="toast('Executive action: Review Manager')">Review Manager</button></div>
+  <div class="card"><div class="card-head"><b>Development</b></div><div class="row"><span>Training facility</span><b>61 / 100</b></div><div class="progress"><i style="width:61%"></i></div><div class="row"><span>Youth academy</span><b>54 / 100</b></div><div class="progress"><i style="width:54%"></i></div><div class="row"><span>Stadium</span><b>72 / 100</b></div><div class="progress"><i style="width:72%"></i></div></div>
+</section>
+
+<section id="world" class="screen">
+  <h2>Football World</h2><div class="sub" style="margin-bottom:12px">ผลจากการบริหารของคุณสะท้อนกลับเข้าสู่โลกฟุตบอล</div>
+  <div class="card"><div class="card-head"><b>Thai League</b><span class="link">2026/27</span></div>
+  <table class="table"><thead><tr><th>#</th><th>Club</th><th>Pts</th><th>GD</th></tr></thead><tbody>
+  <tr><td class="pos">1</td><td>Buriram United</td><td>31</td><td>+18</td></tr>
+  <tr><td class="pos">2</td><td>Port FC</td><td>28</td><td>+11</td></tr>
+  <tr><td class="pos">3</td><td>Bangkok United</td><td>27</td><td>+9</td></tr>
+  <tr><td>4</td><td>Muangthong United</td><td>24</td><td>+5</td></tr>
+  <tr><td>5</td><td>BG Pathum United</td><td>22</td><td>+3</td></tr>
+  </tbody></table></div>
+  <div class="card"><div class="card-head"><b>Latest Match</b><span class="good">SIMULATED</span></div><div class="row"><span>Bangkok United</span><b>2</b></div><div class="row"><span>Chiangrai United</span><b>1</b></div><div class="sub">Match simulation เป็นระบบอิสระจาก UI และ UI แสดงผลเท่านั้น</div></div>
+</section>
+
+<section id="decisions" class="screen">
+  <h2>Decisions</h2><div class="sub" style="margin-bottom:12px">การตัดสินใจที่มีผลระยะยาว</div>
+  <div class="card"><div class="card-head"><b>Youth Investment</b><span class="warn">HIGH IMPACT</span></div><p class="sub">ลงทุนเพิ่มใน Academy ปีนี้ เพื่อเพิ่มคุณภาพนักเตะเยาวชนใน 2–4 ฤดูกาล</p><div class="choice"><button onclick="decision('ลงทุน ฿18M','Youth Development +8 · Cash -18M')">ลงทุน ฿18M</button><button onclick="decision('คงงบเดิม','Cash محفوظ · Development unchanged')">คงงบเดิม</button></div></div>
+  <div class="card"><div class="card-head"><b>Manager Review</b><span class="good">MEDIUM</span></div><p class="sub">ผลงานดี แต่มีข้อเสนอจากสโมสรคู่แข่ง</p><div class="choice"><button onclick="decision('ต่อสัญญา 2 ปี','Manager stability +6 · Wage commitment +')">ต่อสัญญา 2 ปี</button><button onclick="decision('รอ 3 เดือน','Risk of losing manager +5')">รอ 3 เดือน</button></div></div>
+</section>
+
+<section id="president" class="screen">
+  <h2>FA President</h2><div class="sub" style="margin-bottom:12px">สลับบทบาทเพื่อบริหารฟุตบอลทั้งประเทศ</div>
+  <div class="hero"><div class="sub">ASSOCIATION</div><div class="club">Football Association</div><div class="sub">National Football Policy</div><div class="kpis"><div class="kpi"><b>64</b><span>Reputation</span></div><div class="kpi"><b>71</b><span>Development</span></div><div class="kpi"><b>฿620M</b><span>Budget</span></div></div></div>
+  <div class="card"><div class="card-head"><b>Presidential Agenda</b></div><div class="row"><span>League structure</span><b class="good">Healthy</b></div><div class="row"><span>Referee development</span><b>58</b></div><div class="row"><span>Youth pipeline</span><b>63</b></div><div class="row"><span>Stadium infrastructure</span><b>49</b></div><button class="primary" onclick="decision('National Youth Program','Youth pipeline +5 · Budget -฿60M')">Fund National Youth Program</button></div>
+  <div class="notice">President ไม่ควบคุม Starting XI หรือแทคติกของสโมสร — คุณกำหนดระบบฟุตบอลที่สโมสรทั้งหมดต้องดำเนินงานภายใต้</div>
+</section>
+</main>
+
+<nav class="bottom">
+  <button class="nav active" data-screen="home"><span>⌂</span>Home</button>
+  <button class="nav" data-screen="club"><span>◈</span>Club</button>
+  <button class="nav" data-screen="world"><span>◎</span>World</button>
+  <button class="nav" data-screen="decisions"><span>◇</span>Decisions</button>
+  <button class="nav" data-screen="president"><span>♜</span>President</button>
+</nav>
+<div class="toast" id="toast"></div>
+<script>
+const title=document.getElementById('roleTitle');
+const toastBox=document.getElementById('toast');
+document.querySelectorAll('.nav').forEach(btn=>btn.addEventListener('click',()=>{
+  document.querySelectorAll('.screen').forEach(s=>s.classList.remove('active'));
+  document.getElementById(btn.dataset.screen).classList.add('active');
+  document.querySelectorAll('.nav').forEach(n=>n.classList.remove('active')); btn.classList.add('active');
+  title.textContent=btn.dataset.screen==='president'?'Football Association President':'Club Chairman';
+}));
+function toast(msg){toastBox.textContent=msg;toastBox.style.display='block';clearTimeout(window.t);window.t=setTimeout(()=>toastBox.style.display='none',2200)}
+function decision(a,b){toast(a+' → '+b)}
+</script>
+</div>
+</body>
+</html>
